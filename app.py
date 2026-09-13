@@ -6,7 +6,7 @@ class TicTacToe:
         self.root.title("Tic Tac Toe")
         self.root.geometry("400x400")
         self.root.resizable(False, False)
-        self.root.configure(bg="white")  
+        self.root.configure(bg="white")
 
         root.grid_columnconfigure(0, weight=1)
         root.grid_columnconfigure(1, weight=0)
@@ -14,6 +14,8 @@ class TicTacToe:
         root.grid_columnconfigure(3, weight=0)
         root.grid_columnconfigure(4, weight=1)
 
+        self.current_player = "X"
+        self.board = [""] * 9 # list of 9 empty strings to represent the board
         self.buttons = []
 
         self.gameTitle = tk.Label(
@@ -21,7 +23,7 @@ class TicTacToe:
         )
         self.gameTitle.grid(row=0, column=1, columnspan=3)
         self.status = tk.Label(
-            root, text="player X's turn", font=("Helvetica", 10), pady=10, bg="white"
+            root, text="Player X's turn", font=("Helvetica", 10), pady=10, bg="white"
         )
         self.status.grid(row=1, column=1, columnspan=3)
 
@@ -32,7 +34,7 @@ class TicTacToe:
                 font=("Helvetica", 32),
                 width=3,
                 height=1,
-                #command=lambda i=i: self.on_click(i),
+                command=lambda i=i: self.onClick(i),
             )
             btn.grid(row=(i // 3) + 2, column=(i % 3) + 1)
             self.buttons.append(btn)
@@ -45,6 +47,17 @@ class TicTacToe:
             (0, 3, 6), (1, 4, 7), (2, 5, 8),
             (0, 4, 8), (2, 4, 6),
         ]
+
+    def onClick (self, index):
+        self.board[index] = self.current_player
+        self.buttons[index].config(text=self.current_player)
+
+        if self.current_player == "X":
+            self.current_player = "O"
+        else :
+            self.current_player = "X"
+
+        self.status.config(text=f"Player {self.current_player}'s turn")
 
 
 if __name__ == "__main__":
