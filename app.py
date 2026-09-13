@@ -57,6 +57,7 @@ class TicTacToe:
         if winner:
             self.status.config(text=f"Player {winner} wins!")
             messagebox.showinfo("Game Over", f"Player {winner} wins!")
+            self.disableAll()
             return
 
         if "" not in self.board:
@@ -85,6 +86,10 @@ class TicTacToe:
         self.status.config(text="Player X's turn")
         for btn in self.buttons:
             btn.config(text="", state="normal")
+
+    def disableAll (self):
+        for btn in self.buttons:
+            btn.config(state="disabled")
 
 if __name__ == "__main__":
     root = tk.Tk()
