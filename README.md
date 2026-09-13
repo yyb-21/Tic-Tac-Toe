@@ -1,4 +1,4 @@
-# Tic Tac Toe (Tkinter)
+# Tic Tac Toe
 
 A simple two-player Tic Tac Toe game made with Python's Tkinter library.
 
