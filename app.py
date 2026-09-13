@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class TicTacToe:
     def __init__ (self, root):
@@ -52,6 +53,17 @@ class TicTacToe:
         self.board[index] = self.current_player
         self.buttons[index].config(text=self.current_player, state="disabled")
 
+        winner = self.checkWinner()
+        if winner:
+            self.status.config(text=f"Player {winner} wins!")
+            messagebox.showinfo("Game Over", f"Player {winner} wins!")
+            return
+
+        if "" not in self.board:
+            self.status.config(text="It's a draw!")
+            messagebox.showinfo("Game Over", "It's a draw!")
+            return
+
         if self.current_player == "X":
             self.current_player = "O"
         else :
@@ -59,7 +71,15 @@ class TicTacToe:
 
         self.status.config(text=f"Player {self.current_player}'s turn")
 
-    def reset (self) :
+    def checkWinner (self):
+        for combo in self.winning_combos:
+            if (
+                self.board[combo[0]] == self.board[combo[1]] == self.board[combo[2]] != ""
+            ):
+                return self.board[combo[0]]
+        return None
+
+    def reset (self):
         self.board = [""] * 9
         self.current_player = "X"
         self.status.config(text="Player X's turn")
