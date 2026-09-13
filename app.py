@@ -39,7 +39,7 @@ class TicTacToe:
             btn.grid(row=(i // 3) + 2, column=(i % 3) + 1)
             self.buttons.append(btn)
 
-        play_again = tk.Button(root, text="Play again", font=("Helvetica", 12), bg="light blue", activebackground="#003159")
+        play_again = tk.Button(root, text="Play again", font=("Helvetica", 12), bg="light blue", activebackground="#003159", command=self.reset)
         play_again.grid(row=5, column=2, pady=10)
 
         self.winning_combos = [
