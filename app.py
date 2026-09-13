@@ -1,12 +1,53 @@
 import tkinter as tk
 
-root = tk.Tk()
+class TicTacToe:
+    def __init__ (self, root):
+        self.root = root
+        self.root.title("Tic Tac Toe")
+        self.root.geometry("400x400")
+        self.root.resizable(False, False)
+        self.root.configure(bg="white")  
 
-root.geometry("400x400") # the app's dimensions
-root.title("Tic Tac Toe")
+        root.grid_columnconfigure(0, weight=1)
+        root.grid_columnconfigure(1, weight=0)
+        root.grid_columnconfigure(2, weight=0)
+        root.grid_columnconfigure(3, weight=0)
+        root.grid_columnconfigure(4, weight=1)
+
+        self.buttons = []
+
+        self.gameTitle = tk.Label(
+            root, text="Tic Tac Toe", font=("Georgia", 18, "bold"), pady=8, bg="white"
+        )
+        self.gameTitle.grid(row=0, column=1, columnspan=3)
+        self.status = tk.Label(
+            root, text="player X's turn", font=("Helvetica", 10), pady=10, bg="white"
+        )
+        self.status.grid(row=1, column=1, columnspan=3)
+
+        for i in range(9):
+            btn = tk.Button(
+                root,
+                text="",
+                font=("Helvetica", 32),
+                width=3,
+                height=1,
+                #command=lambda i=i: self.on_click(i),
+            )
+            btn.grid(row=(i // 3) + 2, column=(i % 3) + 1)
+            self.buttons.append(btn)
+
+        play_again = tk.Button(root, text="Play again", font=("Helvetica", 12), bg="light blue", activebackground="#003159")
+        play_again.grid(row=5, column=2, pady=10)
+
+        self.winning_combos = [
+            (0, 1, 2), (3, 4, 5), (6, 7, 8),
+            (0, 3, 6), (1, 4, 7), (2, 5, 8),
+            (0, 4, 8), (2, 4, 6),
+        ]
 
 
-button = tk.Button(root, text="Play again")
-button.pack(padx=10, pady=10)
-
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    game = TicTacToe(root)
+    root.mainloop()
