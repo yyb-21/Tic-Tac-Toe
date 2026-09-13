@@ -50,7 +50,7 @@ class TicTacToe:
 
     def onClick (self, index):
         self.board[index] = self.current_player
-        self.buttons[index].config(text=self.current_player)
+        self.buttons[index].config(text=self.current_player, state="disabled")
 
         if self.current_player == "X":
             self.current_player = "O"
