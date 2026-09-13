@@ -59,6 +59,12 @@ class TicTacToe:
 
         self.status.config(text=f"Player {self.current_player}'s turn")
 
+    def reset (self) :
+        self.board = [""] * 9
+        self.current_player = "X"
+        self.status.config(text="Player X's turn")
+        for btn in self.buttons:
+            btn.config(text="", state="normal")
 
 if __name__ == "__main__":
     root = tk.Tk()
